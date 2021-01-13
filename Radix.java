@@ -11,7 +11,7 @@ public class Radix{
   // nth(-123,2) -> 1
 
   public static int length(int n){
-    return 1;
+    return (int)Math.log(Math.abs(n))-1;
   }
   // return the number of digits in n.
   // length(0) -> 1
