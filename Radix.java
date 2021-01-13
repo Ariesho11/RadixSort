@@ -19,9 +19,11 @@ public class Radix{
   // length(-10) -> 2
   // length(5112) -> 4
 
-  //public static void merge(MyLinkedList original,MyLinkedList[]buckets){
-
-//  }
+  public static void merge(SortableLinkedList original,SortableLinkedList[]buckets){
+    for(int i = 0; i < 10; i++){
+      original.extend(buckets[i]);
+    }
+  }
   // Merge all of the linked lists in the bucket array into your original
   // linked list. The original may have elements, and those should be kept.
   // This is O(buckets.length) which should be 10 when we use this later.
