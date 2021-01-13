@@ -2,7 +2,7 @@ public class Radix{
   public static int nth(int n, int col){
     int num = (int)Math.pow(10, col);
     if (col == 0) num = 10;
-    return n%num;
+    return Math.abs((int)((n%num)/(num/10)));
   }
   // get nth digit of an int, where 0 is the ones column, 1 is the tens column etc.
   // nth(123,1) -> 2
