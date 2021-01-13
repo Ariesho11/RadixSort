@@ -1,8 +1,8 @@
 public class Radix{
   public static int nth(int n, int col){
-    int num = (int)Math.pow(10, col);
-    if (col == 0) num = 10;
-    return Math.abs((int)((n%num)/(num/10)));
+    int num = (int)(n/Math.pow(10, col));
+    //if (col == 0) num = 10;
+    return Math.abs(num%10);
   }
   // get nth digit of an int, where 0 is the ones column, 1 is the tens column etc.
   // nth(123,1) -> 2
@@ -20,7 +20,7 @@ public class Radix{
   // length(5112) -> 4
 
   public static void merge(SortableLinkedList original,SortableLinkedList[]buckets){
-    for(int i = 0; i < 10; i++){
+    for(int i = 0; i < buckets.length; i++){
       original.extend(buckets[i]);
     }
   }
@@ -31,27 +31,22 @@ public class Radix{
   // Write and thoroughly test these methods!
   //Hint: Try to calculate the largest number on your least significant digit pass.
   // This tells your method how many passes are needed.
-
+//REMOVE 0 UNTIL NO MORE
 
   public static void radixSortSimple(SortableLinkedList data){
     SortableLinkedList[] buckets = new SortableLinkedList[10];
+    for(int j = 0; j < 10; j++){
+      SortableLinkedList temp = new SortableLinkedList();
+      buckets[j] = new SortableLinkedList();
+    }
     for(int i = 0; i < Findmax(data); i++){
-      for(int j = 0; j < 10; j++){
-        for(int a = 0; a < data.size(); a++){
-          if(nth(data.get(a), j) == 0) buckets[0].add(data.get(a));
-          if(nth(data.get(a), j) == 1) buckets[1].add(data.get(a));
-          if(nth(data.get(a), j) == 2) buckets[2].add(data.get(a));
-          if(nth(data.get(a), j) == 3) buckets[3].add(data.get(a));
-          if(nth(data.get(a), j) == 4) buckets[4].add(data.get(a));
-          if(nth(data.get(a), j) == 5) buckets[5].add(data.get(a));
-          if(nth(data.get(a), j) == 6) buckets[6].add(data.get(a));
-          if(nth(data.get(a), j) == 7) buckets[7].add(data.get(a));
-          if(nth(data.get(a), j) == 8) buckets[8].add(data.get(a));
-          if(nth(data.get(a), j) == 9) buckets[9].add(data.get(a));
-        }
+      while(data.size() > 0){
+        int value = data.remove(0);
+        buckets[nth(value, i)].add(value);
+      }
         merge(data, buckets);
       }
-    }
+      System.out.println(data);
   }
 
   public static int Findmax(SortableLinkedList data){
@@ -64,23 +59,25 @@ public class Radix{
 
   public static void radixSort(SortableLinkedList data){
     SortableLinkedList[] buckets = new SortableLinkedList[10];
+    for(int j = 0; j < 10; j++){
+      SortableLinkedList temp = new SortableLinkedList();
+      buckets[j] = new SortableLinkedList();
+    }
     for(int i = 0; i < Findmax(data); i++){
       for(int j = 0; j < 10; j++){
-        for(int a = 0; a < data.size(); a++){
-          if(nth(data.get(a), j) == 0) buckets[0].add(data.get(a));
-          if(nth(data.get(a), j) == 1) buckets[1].add(data.get(a));
-          if(nth(data.get(a), j) == 2) buckets[2].add(data.get(a));
-          if(nth(data.get(a), j) == 3) buckets[3].add(data.get(a));
-          if(nth(data.get(a), j) == 4) buckets[4].add(data.get(a));
-          if(nth(data.get(a), j) == 5) buckets[5].add(data.get(a));
-          if(nth(data.get(a), j) == 6) buckets[6].add(data.get(a));
-          if(nth(data.get(a), j) == 7) buckets[7].add(data.get(a));
-          if(nth(data.get(a), j) == 8) buckets[8].add(data.get(a));
-          if(nth(data.get(a), j) == 9) buckets[9].add(data.get(a));
+          if(nth(data.get(0), j) == 0) buckets[0].add(data.remove(0));
+          if(nth(data.get(0), j) == 1) buckets[1].add(data.remove(0));
+          if(nth(data.get(0), j) == 2) buckets[2].add(data.remove(0));
+          if(nth(data.get(0), j) == 3) buckets[3].add(data.remove(0));
+          if(nth(data.get(0), j) == 4) buckets[4].add(data.remove(0));
+          if(nth(data.get(0), j) == 5) buckets[5].add(data.remove(0));
+          if(nth(data.get(0), j) == 6) buckets[6].add(data.remove(0));
+          if(nth(data.get(0), j) == 7) buckets[7].add(data.remove(0));
+          if(nth(data.get(0), j) == 8) buckets[8].add(data.remove(0));
+          if(nth(data.get(0), j) == 9) buckets[9].add(data.remove(0));
         }
         merge(data, buckets);
       }
-    }
   }
   // Write a method that sorts non-negative integer values: [This part is the most
   // important part, and I expect every student can complete it!]
