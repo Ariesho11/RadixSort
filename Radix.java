@@ -41,20 +41,26 @@ public class Radix{
     }
     for(int i = 0; i < Findmax(data); i++){
       while(data.size() > 0){
-        int value = data.remove(0);
-        buckets[nth(value, i)].add(value);
+        int temp = data.remove(0);
+        buckets[nth(temp, i)].add(temp);
       }
         merge(data, buckets);
       }
-      System.out.println(data);
   }
 
   public static int Findmax(SortableLinkedList data){
     int max = 0;
-    for(int i = 0; i < data.size(); i++){
-      if (Math.abs(data.get(i)) > max) max = (Math.abs(data.get(i)));
-    }
-    return length(max);
+    // for(int i = 0; i < data.size(); i++){
+    //    if (length(data.get(i)) > max) max = (length(data.get(i)));
+    //  }
+     SortableLinkedList savingPrivateArray = new SortableLinkedList();
+     while(data.size() > 0){
+       int temp = data.remove(0);
+       if(length(temp) > max) max = length(temp);
+       savingPrivateArray.add(temp);
+     }
+     data.extend(savingPrivateArray);
+    return max;
   }
 
   public static void radixSort(SortableLinkedList data){
@@ -83,5 +89,12 @@ public class Radix{
   // important part, and I expect every student can complete it!]
   // Assume there are no negative values.
   // Use the algorithm described in class/class notes
-
+  /*
+  java Driver 10000 1000000
+  java Driver 100000 1000000
+  java Driver 1000000 1000000
+  java Driver 2000000 1000000
+  java Driver 4000000 1000000
+  https://docs.google.com/forms/d/e/1FAIpQLSfr_0lLdqYvxGxRBht5oCT7XVMe917ejg_5Mx1mvie0u3Bitg/viewform
+  */
 }
